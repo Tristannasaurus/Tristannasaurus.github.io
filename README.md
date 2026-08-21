@@ -1,1 +1,4 @@
-# Tristannasaurus.github.io
+# tristan-server-panel-experiment
+
+## details
+hi

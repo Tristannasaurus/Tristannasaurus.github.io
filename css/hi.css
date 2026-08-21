@@ -1,0 +1,107 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+}
+
+.actual-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    
+    background-image: url("../assets/wp.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.whatido {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: aliceblue;
+    font-family: Arial, sans-serif;
+}
+
+/*.topbar {
+    animation-delay: 3s;
+    width: 35%;
+    height: 100px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    transform: translateY(5px);
+    background-color: rgba(241, 241, 241, 0.9);
+        border-radius: 0 100px 100px 0;border-radius: 0 100px 100px 0;
+/* animation: growWidth 2s ease-in-out; */
+
+
+.hasblur {
+    background-color: rgba(241, 241, 241, 0.45);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(50px) saturate(180%);
+}
+
+.himynameis {
+    width: 400px;
+    height: 50px;
+    align-self: center;
+    margin-top: 300px;
+    background-color: rgba(241, 241, 241, 0.1);
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;  
+    align-items: center;      
+    font-size: 50px;
+    font-family: Arial, sans-serif;
+    color: aliceblue;
+    z-index: 2;
+}
+
+.introduction {
+    width: 500px;
+    height: 120px;
+    align-self: center;
+    margin-top: 20px; 
+    background-color: rgba(241, 241, 241, 0.1);
+    border-radius: 25px;
+    animation: fadein 2s ease-in-out;
+    transition: transform 0.3s ease-in-out; 
+    display: flex;
+    justify-content: center;  
+    align-items: center;      
+    font-size: 50px;
+    font-family: Arial, sans-serif;
+    color: aliceblue;
+}
+
+
+
+.introduction:hover {
+    transform: translateY(0) scale(1.10); 
+}
+
+
+@keyframes growWidth {
+  from {
+    width: 5%;
+  }
+  to {
+    width: 35%;
+  }
+}
+
+@keyframes fadein {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+        transform: translateX(-2500px); 
+    }
+    to {
+        background-color: rgba(241, 241, 241, 0.1);
+        transform: translateY(0);
+    }
+}
