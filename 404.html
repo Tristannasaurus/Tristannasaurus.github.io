@@ -14,17 +14,38 @@
       margin: 0;
       background-color: #121212;
       color: #ffffff;
+      text-align: center;
+    }
+    .container {
+      max-width: 400px;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 1.5rem;
+      margin: 0 0 10px 0;
+      font-weight: 600;
+    }
+    p {
+      margin: 0;
+      color: #888888;
+      font-size: 0.95rem;
+      line-height: 1.4;
     }
   </style>
   <script>
     // 1. ADD YOUR SHORT LINKS HERE
-    // Format: "string": "https://destination-url.com"
+    // You can use a simple string URL, OR an object with { url, description }
     const redirects = {
-      "gh": "https://github.com/tristanjh",
-      "discord": "https://discord.gg/yourinvite",
-      "portfolio": "https://tristanjh.me",
-      "twitter": "https://twitter.com/yourhandle"
-      "form": "https://docs.google.com/forms/d/e/1FAIpQLScfzqxXy0Rn9qHMpI3PqkThk7YLtpy8mqXhTOYsSUP19U43nw/viewform?usp=publish-editor"
+      "gh": {
+        url: "https://github.com/tristannasaurus",
+        description: "going to my github profile."
+      },
+      "form": {
+        url: "https://docs.google.com/forms/d/e/1FAIpQLScfzqxXy0Rn9qHMpI3PqkThk7YLtpy8mqXhTOYsSUP19U43nw/viewform?usp=publish-editor",
+        description: "going to the whitelist form"
+      },
+      // You can still use plain strings if you don't need a description:
+      "discord": "https://discord.gg"
     };
 
     // 2. REDIRECT LOGIC
@@ -33,26 +54,42 @@
       const segments = path.split('/').filter(Boolean);
       const lIndex = segments.indexOf('l');
 
-      // Checks if the path contains "/l/[string]"
-      if (lIndex !== -1 && segments[lIndex + 1]) {
-        const slug = segments[lIndex + 1].toLowerCase();
-        const destination = redirects[slug];
-
-        if (destination) {
-          // window.location.replace prevents this page from clogging browser history
-          window.location.replace(destination);
-          return;
-        }
-      }
-
-      // Fallback message if the short link doesn't exist
       window.addEventListener('DOMContentLoaded', () => {
-        document.getElementById('status').innerText = "404 - Link not found.";
+        const statusEl = document.getElementById('status');
+        const descEl = document.getElementById('description');
+
+        if (lIndex !== -1 && segments[lIndex + 1]) {
+          const slug = segments[lIndex + 1].toLowerCase();
+          const target = redirects[slug];
+
+          if (target) {
+            // Handle both object format and simple string format
+            const destinationUrl = typeof target === 'object' ? target.url : target;
+            const customDesc = typeof target === 'object' ? target.description : "Redirecting you now...";
+
+            // Update text on screen
+            statusEl.innerText = "Redirecting...";
+            descEl.innerText = customDesc;
+
+            // Small 800ms delay so users can read the description before jumping
+            setTimeout(() => {
+              window.location.replace(destinationUrl);
+            }, 800);
+            return;
+          }
+        }
+
+        // Fallback if link doesn't exist
+        statusEl.innerText = "404";
+        descEl.innerText = "This short link doesn't exist.";
       });
     })();
   </script>
 </head>
 <body>
-  <p id="status">Redirecting...</p>
+  <div class="container">
+    <h1 id="status">Loading...</h1>
+    <p id="description">Checking link...</p>
+  </div>
 </body>
 </html>
