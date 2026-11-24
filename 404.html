@@ -33,8 +33,6 @@
     }
   </style>
   <script>
-    // 1. ADD YOUR SHORT LINKS HERE
-    // You can use a simple string URL, OR an object with { url, description }
     const redirects = {
       "gh": {
         url: "https://github.com/tristannasaurus",
@@ -44,11 +42,9 @@
         url: "https://docs.google.com/forms/d/e/1FAIpQLScfzqxXy0Rn9qHMpI3PqkThk7YLtpy8mqXhTOYsSUP19U43nw/viewform?usp=publish-editor",
         description: "going to the whitelist form"
       },
-      // You can still use plain strings if you don't need a description:
       "discord": "https://discord.gg"
     };
 
-    // 2. REDIRECT LOGIC
     (function() {
       const path = window.location.pathname;
       const segments = path.split('/').filter(Boolean);
@@ -63,25 +59,18 @@
           const target = redirects[slug];
 
           if (target) {
-            // Handle both object format and simple string format
             const destinationUrl = typeof target === 'object' ? target.url : target;
             const customDesc = typeof target === 'object' ? target.description : "Redirecting you now...";
-
-            // Update text on screen
             statusEl.innerText = "Redirecting...";
             descEl.innerText = customDesc;
-
-            // Small 800ms delay so users can read the description before jumping
             setTimeout(() => {
               window.location.replace(destinationUrl);
             }, 800);
             return;
           }
         }
-
-        // Fallback if link doesn't exist
-        statusEl.innerText = "404";
-        descEl.innerText = "This short link doesn't exist.";
+        statusEl.innerText = ":(";
+        descEl.innerText = "(404) This page doesn't appear to exist";
       });
     })();
   </script>
